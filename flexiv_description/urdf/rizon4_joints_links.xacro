@@ -7,13 +7,18 @@
     mesh_prefix_path = "", "package://flexiv_description/"
     NOTE: accurate kinematic but approximated dynamics parameters
   -->
-  <xacro:macro name="rizon4_joints_links" params="rizon_type prefix mesh_prefix_path">
+  <xacro:macro name="rizon4_joints_links" params="rizon_type prefix mesh_prefix_path add_world:=true parent:=world *origin ">
 
     <!-- JOINTS-->
     <joint name="${prefix}base_joint" type="fixed">
-      <parent link="world"/>
+      <xacro:if value="${add_world}">
+        <parent link="world"/>
+      </xacro:if>
+      <xacro:unless value="${add_world}">
+        <parent link="${parent}"/>
+      </xacro:unless>
       <child link="${prefix}base_link" />
-      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <xacro:insert_block name="origin" />
     </joint>
 
     <joint name="${prefix}joint1" type="revolute">
@@ -84,8 +89,10 @@
     </joint>
 
     <!-- LINKS -->
-    <link name="world">
-    </link>
+    <xacro:if value="${add_world}">
+      <link name="world">
+      </link>
+    </xacro:if>
 
     <link name="${prefix}base_link">
       <inertial>
