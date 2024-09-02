@@ -3,12 +3,15 @@
 
   <xacro:macro name="rizon_robot" params="
     rizon_type
-    prefix 
+    prefix
     robot_ip 
     local_ip 
     use_fake_hardware:=false 
-    fake_sensor_commands:=false 
+    fake_sensor_commands:=false
+    *origin
     initial_positions:=${dict(joint1=0.0,joint2=-0.69813,joint3=0.0,joint4=1.570796,joint5=0.0,joint6=0.69813,joint7=0.0)}
+    add_world:=true
+    parent:=world
     ">
 
     <!-- Import Rviz colors -->
@@ -17,7 +20,12 @@
     <!-- Rizon 4 or 4s-->
     <xacro:if value="${rizon_type=='rizon4' or rizon_type=='rizon4s'}">
       <xacro:include filename="$(find flexiv_description)/urdf/rizon4_joints_links.xacro" />
-      <xacro:rizon4_joints_links rizon_type="${rizon_type}" prefix="${prefix}" mesh_prefix_path="package://flexiv_description/" />
+      <xacro:rizon4_joints_links rizon_type="${rizon_type}" prefix="${prefix}" mesh_prefix_path="package://flexiv_description/"
+                                 add_world="${add_world}" parent="${parent}">
+        <xacro:insert_block name="origin" />
+      </xacro:rizon4_joints_links>
+
+
 
       <!-- ros2 control include -->
       <xacro:include filename="$(find flexiv_description)/urdf/rizon4.ros2_control.xacro"/>
@@ -31,7 +39,10 @@
     <!-- Rizon 10 -->
     <xacro:if value="${rizon_type=='rizon10'}">
       <xacro:include filename="$(find flexiv_description)/urdf/rizon10_joints_links.xacro" />
-      <xacro:rizon10_joints_links rizon_type="${rizon_type}" prefix="${prefix}" mesh_prefix_path="package://flexiv_description/" />
+      <xacro:rizon10_joints_links rizon_type="${rizon_type}" prefix="${prefix}" mesh_prefix_path="package://flexiv_description/"
+                                  add_world="${add_world}" parent="${parent}">
+        <xacro:insert_block name="origin" />
+      </xacro:rizon10_joints_links>
 
       <!-- ros2 control include -->
       <xacro:include filename="$(find flexiv_description)/urdf/rizon10.ros2_control.xacro"/>

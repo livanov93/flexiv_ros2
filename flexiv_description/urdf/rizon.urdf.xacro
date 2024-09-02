@@ -29,6 +29,7 @@
     use_fake_hardware="$(arg use_fake_hardware)" 
     fake_sensor_commands="$(arg fake_sensor_commands)" 
     initial_positions="${xacro.load_yaml(initial_positions_file)}">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
   </xacro:rizon_robot>
 
 </robot>
