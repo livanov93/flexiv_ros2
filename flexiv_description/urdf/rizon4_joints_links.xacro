@@ -107,7 +107,7 @@
         </geometry>
         <material name="rizon_light_grey" />
       </visual>
-      <collision>
+      <collision name="${prefix}base_link">
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link0.stl" />
@@ -128,7 +128,7 @@
         </geometry>
         <material name="rizon_light_grey" />
       </visual>
-      <collision>
+      <collision name="${prefix}link1">
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link1.stl" />
@@ -149,7 +149,7 @@
         </geometry>
         <material name="rizon_light_grey" />
       </visual>
-      <collision>
+      <collision name="${prefix}link2">
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link2.stl" />
@@ -170,7 +170,7 @@
         </geometry>
         <material name="rizon_light_grey" />
       </visual>
-      <collision>
+      <collision name="${prefix}link3">
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link3.stl" />
@@ -191,7 +191,7 @@
         </geometry>
         <material name="rizon_light_grey" />
       </visual>
-      <collision>
+      <collision name="${prefix}link4">
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link4.stl" />
@@ -212,7 +212,7 @@
         </geometry>
         <material name="rizon_light_grey" />
       </visual>
-      <collision>
+      <collision name="${prefix}link5">
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link5.stl" />
@@ -233,7 +233,7 @@
         </geometry>
         <material name="rizon_light_grey" />
       </visual>
-      <collision>
+      <collision name="${prefix}link6">
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link6.stl" />
@@ -255,7 +255,7 @@
           </geometry>
           <material name="rizon_light_grey" />
         </visual>
-        <collision>
+        <collision name="${prefix}link7">
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
             <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link7.stl" />
@@ -275,7 +275,7 @@
           </geometry>
           <material name="rizon_light_grey" />
         </visual>
-        <collision>
+        <collision name="${prefix}link7">
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
             <mesh filename="${mesh_prefix_path}meshes/${rizon_type}/collision/link7.stl" />
