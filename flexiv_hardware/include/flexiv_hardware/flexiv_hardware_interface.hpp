@@ -92,6 +92,7 @@ private:
     std::vector<double> hw_commands_joint_positions_;
     std::vector<double> hw_commands_joint_velocities_;
     std::vector<double> hw_commands_joint_efforts_;
+    const std::vector<double> hw_commands_zero_joint_efforts_ = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
     // Joint states
     std::vector<double> hw_states_joint_positions_;

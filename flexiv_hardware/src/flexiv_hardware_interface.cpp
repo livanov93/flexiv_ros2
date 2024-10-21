@@ -341,9 +341,13 @@ hardware_interface::return_type FlexivHardwareInterface::write(
                && !isNanVel) {
         robot_->streamJointPosition(
             hw_states_joint_positions_, hw_commands_joint_velocities_, targetAcceleration);
-    } else if (torque_controller_running_ && robot_->getMode() == flexiv::Mode::RT_JOINT_TORQUE
-               && !isNanEff) {
-        robot_->streamJointTorque(hw_commands_joint_efforts_, true, true);
+    } else if (torque_controller_running_ && robot_->getMode() == flexiv::Mode::RT_JOINT_TORQUE) {
+
+        if (!isNanEff) {
+            robot_->streamJointTorque(hw_commands_joint_efforts_, true, true);
+        }else{
+            robot_->streamJointTorque(hw_commands_zero_joint_efforts_, true, true);
+        }
     }
 
     // Write digital output
