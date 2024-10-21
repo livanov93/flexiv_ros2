@@ -25,125 +25,35 @@
         </xacro:unless>
       </hardware>
 
-      <joint name="${prefix}joint1">
-        <command_interface name="position">
-          <param name="min">-2.7925</param>
-          <param name="max">2.7925</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-2.0944</param>
-          <param name="max">2.0944</param>
-        </command_interface>
-        <command_interface name="effort"/>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem -->
-          <param name="initial_value">${initial_positions['joint1']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}joint2">
-        <command_interface name="position">
-          <param name="min">-2.2689</param>
-          <param name="max">2.2689</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-2.0944</param>
-          <param name="max">2.0944</param>
-        </command_interface>
-        <command_interface name="effort"/>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem -->
-          <param name="initial_value">${initial_positions['joint2']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}joint3">
-        <command_interface name="position">
-          <param name="min">-2.9671</param>
-          <param name="max">2.9671</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-2.4435</param>
-          <param name="max">2.4435</param>
-        </command_interface>
-        <command_interface name="effort"/>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem -->
-          <param name="initial_value">${initial_positions['joint3']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}joint4">
-        <command_interface name="position">
-          <param name="min">-1.8675</param>
-          <param name="max">2.6878</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-2.4435</param>
-          <param name="max">2.4435</param>
-        </command_interface>
-        <command_interface name="effort"/>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem -->
-          <param name="initial_value">${initial_positions['joint4']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}joint5">
-        <command_interface name="position">
-          <param name="min">-2.9671</param>
-          <param name="max">2.9671</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-4.8869</param>
-          <param name="max">4.8869</param>
-        </command_interface>
-        <command_interface name="effort"/>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem -->
-          <param name="initial_value">${initial_positions['joint5']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}joint6">
-        <command_interface name="position">
-          <param name="min">-1.3963</param>
-          <param name="max">4.5379</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-4.8869</param>
-          <param name="max">4.8869</param>
-        </command_interface>
-        <command_interface name="effort"/>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem -->
-          <param name="initial_value">${initial_positions['joint6']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}joint7">
-        <command_interface name="position">
-          <param name="min">-2.9671</param>
-          <param name="max">2.9671</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-4.8869</param>
-          <param name="max">4.8869</param>
-        </command_interface>
-        <command_interface name="effort"/>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem -->
-          <param name="initial_value">${initial_positions['joint7']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
+      <xacro:include filename="$(find flexiv_description)/urdf/joint.ros2_control.xacro"/>
+      <xacro:joint_ros2_control name="joint1"
+        initial_position="${initial_positions['joint1']}"
+        pos_min="-2.7925" pos_max="2.7925"
+        vel_min="-2.0944" vel_max="2.0944"/>
+      <xacro:joint_ros2_control name="joint2"
+        initial_position="${initial_positions['joint2']}"
+        pos_min="-2.2689" pos_max="2.2689"
+        vel_min="-2.0944" vel_max="2.0944"/>
+      <xacro:joint_ros2_control name="joint3"
+        initial_position="${initial_positions['joint3']}"
+        pos_min="-2.9671" pos_max="2.9671"
+        vel_min="-2.4435" vel_max="2.4435"/>
+      <xacro:joint_ros2_control name="joint4"
+        initial_position="${initial_positions['joint4']}"
+        pos_min="-1.8675" pos_max="2.6878"
+        vel_min="-2.4435" vel_max="2.4435"/>
+      <xacro:joint_ros2_control name="joint5"
+        initial_position="${initial_positions['joint5']}"
+        pos_min="-2.9671" pos_max="2.9671"
+        vel_min="-4.8869" vel_max="4.8869"/>
+      <xacro:joint_ros2_control name="joint6"
+        initial_position="${initial_positions['joint6']}"
+        pos_min="-1.3963" pos_max="4.5379"
+        vel_min="-4.8869" vel_max="4.8869"/>
+      <xacro:joint_ros2_control name="joint7"
+        initial_position="${initial_positions['joint7']}"
+        pos_min="-2.9671" pos_max="2.9671"
+        vel_min="-4.8869" vel_max="4.8869"/>
 
       <sensor name="${prefix}force_torque_sensor">
         <state_interface name="force.x"/>
