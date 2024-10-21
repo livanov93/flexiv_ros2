@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="rizon_mujoco_ros2_control" params="
+    prefix
+    robot_ip
+    local_ip
+    use_fake_hardware:=false
+    fake_sensor_commands:=false
+    initial_positions:=${dict(joint1=0.0,joint2=-0.69813,joint3=0.0,joint4=1.570796,joint5=0.0,joint6=0.69813,joint7=0.0)}
+    mujoco_model
+    ">
+
+    <ros2_control name="MujocoHardwareInterface" type="system">
+      <hardware>
+        <plugin>cartesian_controller_simulation/Simulator</plugin>
+        <param name="mujoco_model">${mujoco_model}</param>
+      </hardware>
+
+      <xacro:include filename="$(find flexiv_description)/urdf/joint.ros2_control.xacro"/>
+      <xacro:joint_ros2_control name="joint1" p="1000" d="0.5" 
+        pos_min="-2.7925" pos_max="2.7925"
+        vel_min="-2.0944" vel_max="2.0944"/>
+      <xacro:joint_ros2_control name="joint2" p="1000" d="0.5" 
+        pos_min="-2.2689" pos_max="2.2689"
+        vel_min="-2.0944" vel_max="2.0944"/>
+      <xacro:joint_ros2_control name="joint3" p="500" d="0.5" 
+        pos_min="-2.9671" pos_max="2.9671"
+        vel_min="-2.4435" vel_max="2.4435"/>
+      <xacro:joint_ros2_control name="joint4" p="100" d="0.5" 
+        pos_min="-1.8675" pos_max="2.6878"
+        vel_min="-2.4435" vel_max="2.4435"/>
+      <xacro:joint_ros2_control name="joint5" p="100" d="0.5" 
+        pos_min="-2.9671" pos_max="2.9671"
+        vel_min="-4.8869" vel_max="4.8869"/>
+      <xacro:joint_ros2_control name="joint6" p="10" d="0.5" 
+        pos_min="-1.3963" pos_max="4.5379"
+        vel_min="-4.8869" vel_max="4.8869"/>
+      <xacro:joint_ros2_control name="joint7" p="10" d="0.5"
+        pos_min="-2.9671" pos_max="2.9671"
+        vel_min="-4.8869" vel_max="4.8869"/>
+
+    </ros2_control>
+  </xacro:macro>
+</robot>

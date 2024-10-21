@@ -20,7 +20,6 @@
                                 <param name="min">${vel_min}</param>
                                 <param name="max">${vel_max}</param>
                         </command_interface>
-                        <command_interface name="effort"/>
                         <param name="p">${p}</param>
                         <param name="d">${d}</param>
                         <state_interface name="position">
