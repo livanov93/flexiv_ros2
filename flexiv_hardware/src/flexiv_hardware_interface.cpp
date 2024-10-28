@@ -256,6 +256,13 @@ hardware_interface::CallbackReturn FlexivHardwareInterface::on_activate(
         return hardware_interface::CallbackReturn::ERROR;
     }
 
+    flexiv::RobotStates robot_states;
+    robot_->getRobotStates(robot_states);
+
+    hw_states_joint_positions_ = robot_states.q;
+    hw_states_joint_velocities_ = robot_states.dtheta;
+    hw_states_joint_efforts_ = robot_states.tau;
+
     RCLCPP_INFO(getLogger(), "System successfully started!");
 
     return hardware_interface::CallbackReturn::SUCCESS;
@@ -341,13 +348,9 @@ hardware_interface::return_type FlexivHardwareInterface::write(
                && !isNanVel) {
         robot_->streamJointPosition(
             hw_states_joint_positions_, hw_commands_joint_velocities_, targetAcceleration);
-    } else if (torque_controller_running_ && robot_->getMode() == flexiv::Mode::RT_JOINT_TORQUE) {
-
-        if (!isNanEff) {
-            robot_->streamJointTorque(hw_commands_joint_efforts_, true, true);
-        }else{
-            robot_->streamJointTorque(hw_commands_zero_joint_efforts_, true, true);
-        }
+    } else if (torque_controller_running_ && robot_->getMode() == flexiv::Mode::RT_JOINT_TORQUE
+               && !isNanEff) {
+        robot_->streamJointTorque(hw_commands_joint_efforts_, true, true);
     }
 
     // Write digital output
