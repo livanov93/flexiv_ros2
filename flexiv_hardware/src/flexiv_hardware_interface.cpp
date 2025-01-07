@@ -233,8 +233,7 @@ hardware_interface::CallbackReturn FlexivHardwareInterface::on_activate(
         return hardware_interface::CallbackReturn::ERROR;
     }
 
-    flexiv::RobotStates robot_states;
-    robot_->getRobotStates(robot_states);
+    flexiv::rdk::RobotStates robot_states = robot_->states();
 
     hw_states_joint_positions_ = robot_states.q;
     hw_states_joint_velocities_ = robot_states.dtheta;
@@ -310,11 +309,11 @@ hardware_interface::return_type FlexivHardwareInterface::write(
         && !isNanPos) {
         robot_->SendJointPosition(
             hw_commands_joint_positions_, target_vel, target_acc, max_vel, max_acc);
-    } else if (velocity_controller_running_ && robot_->mode() == flexiv::Mode::NRT_JOINT_POSITION
+    } else if (velocity_controller_running_ && robot_->mode() == flexiv::rdk::Mode::NRT_JOINT_POSITION
                && !isNanVel) {
         robot_->SendJointPosition(
             hw_states_joint_positions_, hw_commands_joint_velocities_, target_acc, max_vel, max_acc);
-    } else if (torque_controller_running_ && robot_->mode() == flexiv::Mode::NRT_JOINT_TORQUE) {
+    } else if (torque_controller_running_ && robot_->mode() == flexiv::rdk::Mode::RT_JOINT_TORQUE) {
 
         if (!isNanEff) {
             robot_->StreamJointTorque(hw_commands_joint_efforts_, true, true);
