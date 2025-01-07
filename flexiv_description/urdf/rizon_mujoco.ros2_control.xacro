@@ -3,8 +3,7 @@
 
   <xacro:macro name="rizon_mujoco_ros2_control" params="
     prefix
-    robot_ip
-    local_ip
+    robot_sn
     use_fake_hardware:=false
     fake_sensor_commands:=false
     initial_positions:=${dict(joint1=0.0,joint2=-0.69813,joint3=0.0,joint4=1.570796,joint5=0.0,joint6=0.69813,joint7=0.0)}
