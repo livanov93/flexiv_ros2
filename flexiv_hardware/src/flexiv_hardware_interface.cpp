@@ -233,8 +233,7 @@ hardware_interface::CallbackReturn FlexivHardwareInterface::on_activate(
         return hardware_interface::CallbackReturn::ERROR;
     }
 
-    flexiv::RobotStates robot_states;
-    robot_->getRobotStates(robot_states);
+    flexiv::rdk::RobotStates robot_states = robot_->states();
 
     hw_states_joint_positions_ = robot_states.q;
     hw_states_joint_velocities_ = robot_states.dtheta;
