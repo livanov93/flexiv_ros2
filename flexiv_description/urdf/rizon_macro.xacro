@@ -6,9 +6,13 @@
     prefix
     robot_sn
     load_gripper:=false
-    use_fake_hardware:=false
+    use_fake_hardware:=false 
     fake_sensor_commands:=false
+    *origin
     initial_positions:=${dict(joint1=0.0,joint2=-0.69813,joint3=0.0,joint4=1.570796,joint5=0.0,joint6=0.69813,joint7=0.0)}
+    add_world:=true
+    parent:=world
+    mujoco_model:=''
     ">
 
     <!-- Load gripper -->
@@ -23,21 +27,40 @@
     <!-- Rizon 4 or 4s-->
     <xacro:if value="${rizon_type=='rizon4' or rizon_type=='rizon4s'}">
       <xacro:include filename="$(find flexiv_description)/urdf/rizon4_joints_links.xacro" />
-      <xacro:rizon4_joints_links rizon_type="${rizon_type}" prefix="${prefix}" mesh_prefix_path="package://flexiv_description/" />
+      <xacro:rizon4_joints_links rizon_type="${rizon_type}" prefix="${prefix}" mesh_prefix_path="package://flexiv_description/"
+                                 add_world="${add_world}" parent="${parent}">
+        <xacro:insert_block name="origin" />
+      </xacro:rizon4_joints_links>
+
+
 
       <!-- ros2 control include -->
-      <xacro:include filename="$(find flexiv_description)/urdf/rizon4.ros2_control.xacro"/>
-      <xacro:rizon4_ros2_control prefix="${prefix}" robot_sn="${robot_sn}"
-        use_fake_hardware="${use_fake_hardware}"
-        fake_sensor_commands="${fake_sensor_commands}"
-        initial_positions="${initial_positions}"
-        />
+      <xacro:if value="${mujoco_model==''}">
+        <xacro:include filename="$(find flexiv_description)/urdf/rizon4.ros2_control.xacro"/>
+        <xacro:rizon4_ros2_control prefix="${prefix}" robot_sn="${robot_sn}" 
+          use_fake_hardware="${use_fake_hardware}" 
+          fake_sensor_commands="${fake_sensor_commands}" 
+          initial_positions="${initial_positions}"
+          />
+      </xacro:if>
+      <xacro:unless value="${mujoco_model==''}">
+        <xacro:include filename="$(find flexiv_description)/urdf/rizon_mujoco.ros2_control.xacro"/>
+        <xacro:rizon_mujoco_ros2_control prefix="${prefix}" robot_sn="${robot_sn}" 
+          use_fake_hardware="${use_fake_hardware}" 
+          fake_sensor_commands="${fake_sensor_commands}"
+          initial_positions="${initial_positions}"
+          mujoco_model="${mujoco_model}"
+          />
+      </xacro:unless>
     </xacro:if>
 
     <!-- Rizon 10 or 10s-->
     <xacro:if value="${rizon_type=='rizon10' or rizon_type=='rizon10s'}">
       <xacro:include filename="$(find flexiv_description)/urdf/rizon10_joints_links.xacro" />
-      <xacro:rizon10_joints_links rizon_type="${rizon_type}" prefix="${prefix}" mesh_prefix_path="package://flexiv_description/" />
+      <xacro:rizon10_joints_links rizon_type="${rizon_type}" prefix="${prefix}" mesh_prefix_path="package://flexiv_description/"
+                                  add_world="${add_world}" parent="${parent}">
+        <xacro:insert_block name="origin" />
+      </xacro:rizon10_joints_links>
 
       <!-- ros2 control include -->
       <xacro:include filename="$(find flexiv_description)/urdf/rizon10.ros2_control.xacro"/>
